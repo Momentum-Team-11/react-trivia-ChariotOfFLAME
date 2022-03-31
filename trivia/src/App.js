@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Categories from './components/Categories';
+import Quiz from './components/Quiz';
 
 const App = () => {
   const [categories, setCategories] = useState(['Not available']);
@@ -17,26 +18,37 @@ const App = () => {
       <div>
         <h1>React Trivia</h1>
         <div>
-          <h2>Pick a Cateogory</h2>
           {selectedCat ? (
             <>
-              <h1>hello world!</h1>
+              <Quiz
+                name={selectedCat.name}
+                id={selectedCat.id}
+                key={`quiz-#${selectedCat.id}`}
+              />
               <button onClick={() => setSelectedCat(false)}>
                 Show all Categories
               </button>
             </>
           ) : (
-            <ul>
-              {categories.map((category, idx) => {
-                return (
-                  <Categories
-                    name={category.name}
-                    id={category.id}
-                    key={category.id}
-                  />
-                );
-              })}
-            </ul>
+            <>
+              <h2>Pick a Cateogory</h2>
+              <ul>
+                {categories.map((category, idx) => {
+                  return (
+                    <div
+                      className='cat-tile'
+                      onDoubleClick={() => setSelectedCat(category)}
+                    >
+                      <Categories
+                        name={category.name}
+                        id={category.id}
+                        key={`cateogry-#${category.id}`}
+                      />
+                    </div>
+                  );
+                })}
+              </ul>
+            </>
           )}
         </div>
       </div>
