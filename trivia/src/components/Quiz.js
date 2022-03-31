@@ -1,21 +1,15 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { decode } from 'html-entities';
+import Correct from './Correct';
 
 const Quiz = ({ name, id }) => {
   const [questions, setQuestions] = useState([]);
   const [currentQ, setCurrentQ] = useState(0);
   const [currentA, setCurrentA] = useState('');
   const [correctA, setCorrectA] = useState('');
-  const [results, viewingResults] = useState(false);
+  const [results, setResults] = useState(false);
   const [count, setCount] = useState(0);
-  function compare(currentA, correctA) {
-    if (currentA === correctA) {
-      return <p>Correct!</p>;
-    } else {
-      return <p>Incorrect...</p>;
-    }
-  }
 
   useEffect(() => {
     console.log(`use effect for quiz runs. Get API result for ${id}`);
@@ -40,7 +34,7 @@ const Quiz = ({ name, id }) => {
                     <button
                       onClick={() => {
                         setCurrentA('True');
-                        viewingResults(true);
+                        setResults(true);
                         setCorrectA(`${questionObject.correct_answer}`);
                       }}
                     >
@@ -49,7 +43,7 @@ const Quiz = ({ name, id }) => {
                     <button
                       onClick={() => {
                         setCurrentA('False');
-                        viewingResults(true);
+                        setResults(true);
                         setCorrectA(`${questionObject.correct_answer}`);
                       }}
                     >
@@ -58,11 +52,11 @@ const Quiz = ({ name, id }) => {
                   </>
                 ) : (
                   <>
-                    {compare(currentA, correctA)}
+                    <p>The answer would go here</p>
                     <button
                       onClick={() => {
                         setCurrentQ(idx + 1);
-                        viewingResults(false);
+                        setResults(false);
                       }}
                     >
                       Next Question
