@@ -1,28 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Correct = ({ currentA, correctA }) => {
-  const [correct, setCorrect] = useState(false);
+  const [correct, setCorrect] = useState(null);
+  useEffect(() => {
+    if (currentA === correctA) {
+      setCorrect(true);
+    } else {
+      setCorrect(false);
+    }
+  });
 
-  if (currentA === correctA) {
-    setCorrect(true);
-  } else {
-    setCorrect(false);
-  }
-
-  return (
-    <>
-      {correct ? (
-        <>
-          <p>Correct!</p>n
-        </>
-      ) : (
-        <>
-          <p>Incorrect...</p>
-        </>
-      )}
-      )
-    </>
-  );
+  return <>{correct ? <p>Correct!</p> : <p>Incorrect...</p>}</>;
 };
 
 export default Correct;

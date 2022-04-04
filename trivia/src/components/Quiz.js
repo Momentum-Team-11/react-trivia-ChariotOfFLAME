@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { decode } from 'html-entities';
 import Correct from './Correct';
+import Finish from './Finish';
 
 const Quiz = ({ name, id }) => {
   const [questions, setQuestions] = useState([]);
@@ -10,6 +11,7 @@ const Quiz = ({ name, id }) => {
   const [correctA, setCorrectA] = useState('');
   const [results, setResults] = useState(false);
   const [count, setCount] = useState(0);
+  const [end, setEnd] = useState(false);
 
   useEffect(() => {
     console.log(`use effect for quiz runs. Get API result for ${id}`);
@@ -52,11 +54,17 @@ const Quiz = ({ name, id }) => {
                   </>
                 ) : (
                   <>
-                    <p>The answer would go here</p>
+                    <Correct currentA={currentA} correctA={correctA} />
                     <button
                       onClick={() => {
-                        setCurrentQ(idx + 1);
-                        setResults(false);
+                        if (currentA === correctA) {
+                          setCurrentQ(idx + 1);
+                          setResults(false);
+                          setCount(count + 1);
+                        } else {
+                          setCurrentQ(idx + 1);
+                          setResults(false);
+                        }
                       }}
                     >
                       Next Question
@@ -65,10 +73,9 @@ const Quiz = ({ name, id }) => {
                 )}
               </div>
             );
-          } else {
-            return null;
           }
         })}
+        <Finish currentQ={currentQ} count={count} />
       </div>
     </div>
   );
