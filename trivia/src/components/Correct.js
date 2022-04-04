@@ -8,7 +8,7 @@ const Correct = ({ currentA, correctA }) => {
     } else {
       setCorrect(false);
     }
-  });
+  }, [currentA, correctA]);
 
   return <>{correct ? <p>Correct!</p> : <p>Incorrect...</p>}</>;
 };
