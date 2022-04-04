@@ -20,19 +20,27 @@ const Quiz = ({ name, id }) => {
   }, [id]);
 
   return (
-    <div className='quiz'>
-      <h2>{`${name} Quiz`}</h2>
+    <div className='quiz uk-animation-fade'>
+      <h2 className='uk-text-center'>{`${name} Quiz`}</h2>
       <div className='quiz-contents'>
         {questions.map((questionObject, idx) => {
           if (idx === currentQ) {
             return (
-              <div className={`question-container`} key={`question-${idx}`}>
-                <p>{`${count} of ${idx} correct`}</p>
-                <h2>{`Question ${idx + 1} of 10`}</h2>
-                <p>{decode(`${questionObject.question}`)}</p>
+              <div
+                className={`question-container uk-align-center uk-width-1-3`}
+                key={`question-${idx}`}
+              >
+                <p className='uk-text-center'>{`${count} of ${idx} correct`}</p>
+                <h2 className='uk-text-center'>{`Question ${
+                  idx + 1
+                } of 10`}</h2>
+                <p className='uk-text-center'>
+                  {decode(`${questionObject.question}`)}
+                </p>
                 {!results ? (
                   <>
                     <button
+                      className='uk-button uk-button-primary uk-button-small uk-flex-center uk-margin-xlarge-left uk-margin-small-right'
                       onClick={() => {
                         setCurrentA('True');
                         setResults(true);
@@ -42,6 +50,7 @@ const Quiz = ({ name, id }) => {
                       True
                     </button>
                     <button
+                      className='uk-button uk-button-danger uk-button-small uk-margin-small-left'
                       onClick={() => {
                         setCurrentA('False');
                         setResults(true);
@@ -55,6 +64,7 @@ const Quiz = ({ name, id }) => {
                   <>
                     <Correct currentA={currentA} correctA={correctA} />
                     <button
+                      className='uk-button uk-button-secondary uk-align-center'
                       onClick={() => {
                         if (currentA === correctA) {
                           setCurrentQ(idx + 1);

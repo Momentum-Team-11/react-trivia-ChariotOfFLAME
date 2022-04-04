@@ -3,7 +3,9 @@ const Categories = (category) => {
 
   return (
     <li>
-      <h3 id={id}>{name}</h3>
+      <a href='#' id={id}>
+        {name}
+      </a>
     </li>
   );
 };

@@ -10,7 +10,17 @@ const Correct = ({ currentA, correctA }) => {
     }
   }, [currentA, correctA]);
 
-  return <>{correct ? <p>Correct!</p> : <p>Incorrect...</p>}</>;
+  return (
+    <>
+      {correct ? (
+        <p className='uk-text-center uk-text-large uk-text-success'>Correct!</p>
+      ) : (
+        <p className='uk-text-center uk-text-large uk-text-danger'>
+          Incorrect...
+        </p>
+      )}
+    </>
+  );
 };
 
 export default Correct;
