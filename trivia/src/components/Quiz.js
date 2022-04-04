@@ -11,7 +11,6 @@ const Quiz = ({ name, id }) => {
   const [correctA, setCorrectA] = useState('');
   const [results, setResults] = useState(false);
   const [count, setCount] = useState(0);
-  const [end, setEnd] = useState(false);
 
   useEffect(() => {
     console.log(`use effect for quiz runs. Get API result for ${id}`);

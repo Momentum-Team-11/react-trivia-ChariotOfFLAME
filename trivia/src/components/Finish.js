@@ -1,5 +1,3 @@
-import { useState, useEffect } from 'react';
-
 const Finish = ({ currentQ, count }) => {
   if (currentQ > 9) {
     return (
